@@ -1,0 +1,1 @@
+<div>SOMETHING WENT WRONG. IT WAS EITHER YOURS, OR MY FAULT : ( DO YOU WANT TO GO BACK TO THE <a href="./login.php">LOGIN PAGE</a>??</div>

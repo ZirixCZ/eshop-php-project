@@ -1,0 +1,15 @@
+{
+    "name": "nextap/mysqlshans",
+    "autoload": {
+        "psr-4": {
+            "Nextap\\Mysqlshans\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Michal Vaniš",
+            "email": "zirixcz@gmail.com"
+        }
+    ],
+    "require": {}
+}
