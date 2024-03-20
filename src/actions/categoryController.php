@@ -1,11 +1,10 @@
 <?php
 session_start();
-require '../../db.php';
 require '../../src/models/CategoryModel.php';
 require '../../src/models/ProductModel.php';
 
-$categoryModel = new CategoryModel($pdo);
-$productModel = new ProductModel($pdo);
+$categoryModel = new CategoryModel();
+$productModel = new ProductModel();
 
 $category_id = $_GET['category_id'] ?? null;
 
@@ -20,4 +19,3 @@ if ($category_id) {
     exit;
 }
 ?>
-

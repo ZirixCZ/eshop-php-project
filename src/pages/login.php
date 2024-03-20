@@ -8,6 +8,6 @@
     Password: <input type="password" name="password"><br>
     <input type="hidden" name="login" value="true">
     <input type="submit" value="Login">
-    <a href="/src/pages/register.php">go to register</a>
+    <a href="/src/actions/register.php">go to register</a>
 </form>
 

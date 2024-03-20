@@ -1,29 +1,28 @@
 <?php
 session_start();
 
-require '../../db.php';
 require '../../src/models/UserModel.php';
 
 $username = $_POST['username'] ?? null;
 $password = $_POST['password'] ?? null;
 
-$userModel = new UserModel($pdo);
+$userModel = new UserModel();
 
 if ($username && $password) {
     $user = $userModel->findUserByUsername($username);
 
     if ($user && $userModel->checkPassword($user, $password)) {
-        $_SESSION["isAdmin"] = $user['Roles_id'] == 1; 
+        $_SESSION["isAdmin"] = $user['Roles_id'] == 1;
         $_SESSION["username"] = $username;
 
         if ($_SESSION["isAdmin"]) {
-            header("Location: ../pages/adminPage.php"); 
+            header("Location: ./adminController.php");
             exit;
-        } else if (isset($_SESSION["username"])) {
-            header("Location: ./userController.php"); 
+        } else if (isset ($_SESSION["username"])) {
+            header("Location: ./userController.php");
             exit;
         } else {
-          header("Location: ../pages/login.php");
+            header("Location: ../pages/login.php");
         }
     } else {
         echo "Login failed: Incorrect password or user not found";

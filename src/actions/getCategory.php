@@ -1,28 +1,20 @@
 <?php
-require '../../db.php'; 
+session_start();
+require '../../src/models/CategoryModel.php';
+require '../../src/models/ProductModel.php';
 
-function fetchCategories($pdo, $parentId = null) {
-    $stmt = $pdo->prepare("SELECT * FROM `db`.`Category` WHERE Category_id IS :parentId");
-    $stmt->bindParam(':parentId', $parentId, $parentId ? PDO::PARAM_INT : PDO::PARAM_NULL);
-    $stmt->execute();
-    return $stmt->fetchAll(PDO::FETCH_ASSOC);
-}
+$categoryModel = new CategoryModel();
+$productModel = new ProductModel();
 
-function fetchProducts($pdo, $categoryId) {
-    $stmt = $pdo->prepare("SELECT * FROM `db`.`Product` WHERE Category_id = :categoryId");
-    $stmt->bindParam(':categoryId', $categoryId);
-    $stmt->execute();
-    return $stmt->fetchAll(PDO::FETCH_ASSOC);
-}
-
-function displayCategories($pdo, $parentId = null) {
-    $categories = fetchCategories($pdo, $parentId);
+function displayCategories(CategoryModel $categoryModel, ProductModel $productModel, $parentId = null)
+{
+    $categories = $categoryModel->fetchCategories($parentId);
     if ($categories) {
         echo '<ul>';
         foreach ($categories as $category) {
             echo '<li>' . htmlspecialchars($category['category_name']);
-            displayCategories($pdo, $category['id']);
-            $products = fetchProducts($pdo, $category['id']);
+            displayCategories($categoryModel, $productModel, $category['id']);
+            $products = $productModel->getProducts($category['id']);
             if ($products) {
                 echo '<ul>';
                 foreach ($products as $product) {
@@ -36,5 +28,5 @@ function displayCategories($pdo, $parentId = null) {
     }
 }
 
-displayCategories($pdo);
+displayCategories($categoryModel, $productModel);
 ?>

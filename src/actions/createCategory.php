@@ -1,10 +1,8 @@
-
 <?php
 session_start();
-require '../../db.php';
 require '../../src/models/CategoryModel.php';
 
-$categoryModel = new CategoryModel($pdo);
+$categoryModel = new CategoryModel();
 
 $name = $_POST['category_name'] ?? null;
 $slug = $_POST['category_slug'] ?? null;
@@ -21,4 +19,3 @@ if (!$name || !$slug) {
     }
 }
 ?>
-

@@ -1,19 +1,18 @@
-<?php 
+<?php
 session_start();
-require '../../db.php';
 require '../../src/models/CategoryModel.php';
-require '../../src/models/RoleModel.php'; 
+require '../../src/models/RoleModel.php';
 
 
-if (!isset($_SESSION['username']) || !$_SESSION['isAdmin']) {
+if (!isset ($_SESSION['username']) || !$_SESSION['isAdmin']) {
     header("Location: ../pages/login.php");
     exit;
 }
 
-$roleModel = new RoleModel($pdo);
+$roleModel = new RoleModel();
 $roles = $roleModel->fetchAllRoles();
 
-$categoryModel = new CategoryModel($pdo);
+$categoryModel = new CategoryModel();
 $categories = $categoryModel->fetchAllCategories();
 
 $username = $_SESSION['username'];

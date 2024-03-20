@@ -1,33 +1,23 @@
-
 <?php
-require '../../db.php';  
+session_start();
+require '../../src/models/UserModel.php';
 
 $username = $_POST['username'] ?? null;
 $password = $_POST['password'] ?? null;
+
+$userModel = new UserModel();
 
 if (!$username || !$password) {
     echo "Please provide both a username and a password.";
     exit;
 }
 
-$stmt = $pdo->prepare("SELECT * FROM `db`.`User` WHERE username = :username");
-$stmt->bindParam(':username', $username);
-$stmt->execute();
-
-if ($stmt->fetch(PDO::FETCH_ASSOC)) {
+if ($userModel->userExists($username)) {
     echo "Username already exists. Please choose another one.";
     exit;
 }
 
-$password_hash = password_hash($password, PASSWORD_DEFAULT);
-$defaultRoleId = 2;
-
-$stmt = $pdo->prepare("INSERT INTO `db`.`User` (username, password_hash, Roles_id) VALUES (:username, :password_hash, :roles_id)");
-$stmt->bindParam(':username', $username);
-$stmt->bindParam(':password_hash', $password_hash);
-$stmt->bindParam(':roles_id', $defaultRoleId);
-
-if ($stmt->execute()) {
+if ($userModel->registerUser($username, $password)) {
     echo "Registration successful!";
     $_SESSION["username"] = $username;
     header("Location: ../pages/login.php");
@@ -35,5 +25,3 @@ if ($stmt->execute()) {
 } else {
     echo "Error during registration.";
 }
-?>
-
