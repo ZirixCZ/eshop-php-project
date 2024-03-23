@@ -33,10 +33,9 @@ class UserModel
 
     public function registerUser($username, $password, $roles_id = 2)
     {
-        $password_hash = password_hash($password, PASSWORD_DEFAULT);
         $stmt = $this->pdo->prepare("INSERT INTO `db`.`User` (username, password_hash, Roles_id) VALUES (:username, :password_hash, :roles_id)");
         $stmt->bindParam(':username', $username);
-        $stmt->bindParam(':password_hash', $password_hash);
+        $stmt->bindParam(':password_hash',password_hash($password, PASSWORD_DEFAULT));
         $stmt->bindParam(':roles_id', $roles_id);
         return $stmt->execute();
     }
