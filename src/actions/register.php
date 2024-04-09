@@ -57,7 +57,9 @@ function sendMail($email) {
 }
 
 if ($userModel->registerUser($username, $password)) {
-  sendMail($email);
+    if ($email) {
+      sendMail($email);
+    }
     echo "Registration successful!";
     $_SESSION["username"] = $username;
     header("Location: ../pages/login.php");
