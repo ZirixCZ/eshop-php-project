@@ -5,7 +5,12 @@
 https://github.com/ZirixCZ/eshop-php-project/assets/49836430/16183484-4e50-4fe3-9b9d-a10e43a46945
 
 
+# Why is Laravel more convinient than vanilla
 
+Laravel provides a structured framework that makes PHP development faster and more organized. It includes tools for tasks like routing and authentication, saving time and effort. Plus, the large community and thorough documentation make it easy to find help and resources.
+
+# Project structure (MVC in the project)
+In Laravel’s MVC structure, routes are defined in the web.php file, directing traffic to the appropriate controller methods. Views, located in the resources/views directory, handle the presentation of data. Controllers manage the logic and data handling, acting as a bridge between routes and views.
 
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
